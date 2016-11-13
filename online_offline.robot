@@ -209,9 +209,7 @@
 |    | Go to the offline module |
 |    | Edit last created event on client |
 |    | Edit session on client |
-|    | Comment | Assert successful (Edit session on client) |
 |    | Update event and sync with server (Don't Click On the last event) |
-|    | Comment | Store session number on client |
 |    | Admin Login |
 |    | Click On Workshop In the server |
 |    | Check for the edited event on server(Update Session) |
@@ -225,3 +223,9 @@
 |    | Admin Login |
 |    | Click On Workshop In the server |
 |    | Check for the edited event on server(Add Session) |
+
+| Compare Evaluations |
+|    | Go to the offline module |
+|    | Click On Workshop To Open The Offline Module |
+|    | Edit last created event on client |
+|    | Edit evaluation |

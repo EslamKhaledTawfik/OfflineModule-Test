@@ -183,10 +183,6 @@
 |    | Edit last created event |
 |    | Add another Trainer |
 
-| Edit trainer on server |
-|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[1]/td[2]/div/div/div[1]/div | ${new_trainer_firstname}.{new_trainer_las${new_trainer_lastname} |
-|    | Click Link | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[2]/a |
-
 | Partner login |
 |    | Open Browser | ${SiteUrl} | ${Browser} |
 |    | Maximize Browser Window |
@@ -331,11 +327,6 @@
 |    | sleep | 2s |
 |    | Element Should Contain | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/table/tbody/tr[5]/td[2]/span/span | ${session_num} |
 
-| Search for the trainer |
-|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[1]/td[2]/div/div/div[1]/div | Afghanistan |
-|    | Press Key | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[1]/td[2]/div/div/div[1]/div | \\13 |
-|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
-
 | Delete the last created trainer |
 |    | Click Element | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1]/th/input |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[2]/div/div[1]/div/div[2]/button |
@@ -346,10 +337,7 @@
 |    | Admin Login |
 |    | Delete Event From Server |
 |    | Assert Event Delete On Server |
-|    | Go to the offline module |
-|    | Sync the data |
-|    | Assert Event Delete On Client |
-|    | Close Browser |
+|    | Close All Browsers |
 
 | Delete Trainer |
 |    | Click Link | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[2]/a |
@@ -396,9 +384,6 @@
 |    | Press Key | xpath=//*[@id="sessionStartTime_1"] | 0900PM |
 |    | Press Key | xpath=//*[@id="sessionEndTime_1"] | 1100PM |
 |    | Input text | xpath=//*[@id="sessionComment_1"] | Edited Session |
-
-| Assert successful (Edit session on client) |
-|    | Element Should Contain | xpath=xpath=//*[@id="sessionComment_1"] | Edited Session |
 
 | Edit event on client |
 |    | Comment | Click Button | xpath=//*[@id="enable_editing_button"] |
@@ -485,10 +470,6 @@
 |    | sleep | 2s |
 |    | Element Should Contain | xpath=//*[@id="sessions_num"] | ${session_num} |
 
-| Back to workshops on client |
-|    | Click Element | xpath=//*[@id="eventFormDiv"]/div[1]/a/span |
-|    | Comment | Sleep | 50s |
-
 | Check for the edited event on server(Update Session) |
 |    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[1]/div/div[2]/span[1]/div/button |
@@ -517,3 +498,8 @@
 |    | Create event from client |
 |    | Create session from client |
 |    | Save event and sync with server |
+
+| Edit evaluation |
+|    | Click Element | xpath=//*[@id="ui-id-4"] |
+|    | Click Element | xpath=//*[@id="mybtn_1"] |
+|    | Radio Button Should Be Set To | course_assessment_val | 5 |
