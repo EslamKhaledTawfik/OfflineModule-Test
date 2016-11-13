@@ -195,6 +195,7 @@
 |    | Element Should Not Contain | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1]/td[7] | ${trainer} |
 
 | Create Session From Client |
+|    | [Setup] | [TestCase]Create event from client |
 |    | Go to the offline module |
 |    | Edit last created event on client |
 |    | Create another session from client |

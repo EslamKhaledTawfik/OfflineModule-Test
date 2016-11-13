@@ -511,3 +511,13 @@
 |    | Save Event |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
+
+| [TestCase]Create event from client |
+|    | Go to the offline module |
+|    | Create event from client |
+|    | Create session from client |
+|    | Save event and sync with server |
+|    | Store client_eventID |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Compare client_event id with server id |
