@@ -1,4 +1,5 @@
 | *** Settings *** |
+| Test Teardown  | Close All Browsers |
 | Resource       | Keywords.robot |
 
 | *** Test Cases *** |
@@ -225,7 +226,10 @@
 |    | Check for the edited event on server(Add Session) |
 
 | Compare Evaluations |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Click on last created event |
+|    | Click on Evaluation |
 |    | Go to the offline module |
-|    | Click On Workshop To Open The Offline Module |
 |    | Edit last created event on client |
-|    | Edit evaluation |
+|    | Check evaluation |

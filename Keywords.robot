@@ -1,6 +1,7 @@
 | *** Setting *** |
-| Library        | Selenium2Library | 150 | 1.5 |
+| Library        | Selenium2Library | 150 | 1.2 |
 | Resource       | Variables.robot |
+| Library        | MySeleniumTest |
 
 | *** Keywords *** |
 | Admin Login |
@@ -11,6 +12,15 @@
 |    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${admin_password} |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[10]/button |
 |    | sleep | 2s |
+
+| Partner login |
+|    | Open Browser | ${SiteUrl} | ${Browser} |
+|    | Maximize Browser Window |
+|    | Set Selenium Speed | 0.7 |
+|    | Wait Until Page Contains Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input |
+|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input | ${partner_username} |
+|    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${partner_password} |
+|    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[10]/button |
 
 | Create Event Without Trainer From Server |
 |    | Click On Workshop In the server |
@@ -78,9 +88,9 @@
 |    | sleep | 2s |
 
 | Click On Workshop In the server |
-|    | sleep | 2s |
+|    | sleep | 2.5s |
 |    | Click Link | xpath=/html/body/div/table/tbody/tr[1]/td/ul/li[8]/a |
-|    | sleep | 2s |
+|    | sleep | 2.5s |
 
 | Create a new Event |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[1]/div/div/button[1] |
@@ -183,16 +193,6 @@
 |    | Edit last created event |
 |    | Add another Trainer |
 
-| Partner login |
-|    | Open Browser | ${SiteUrl} | ${Browser} |
-|    | Maximize Browser Window |
-|    | sleep | 1s |
-|    | Set Selenium Speed | 1 seconds |
-|    | Wait Until Page Contains Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input |
-|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input | ${partner_username} |
-|    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${partner_password} |
-|    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[10]/button |
-
 | Click On Workshop To Open The Offline Module |
 |    | Wait Until Page Contains Element | xpath=/html/body/div/table/tbody/tr[1]/td/ul/li[3]/a |
 |    | Click Link | xpath=/html/body/div/table/tbody/tr[1]/td/ul/li[3]/a |
@@ -243,7 +243,7 @@
 |    | Partner login |
 |    | Open the offline module (Workshop) |
 |    | Load the data |
-|    | Sleep | 10s |
+|    | Sleep | 3s |
 
 | Check for the edited event on client (General Edit) |
 |    | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
@@ -266,7 +266,7 @@
 |    | Press Key | xpath=//*[@id="trainersList_chosen"]/ul/li/input | \\13 |
 
 | Edit last created event |
-|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
+|    | Click on last created event |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[1]/div/div[2]/span[1]/div/button |
 |    | sleep | 2s |
 
@@ -499,7 +499,71 @@
 |    | Create session from client |
 |    | Save event and sync with server |
 
-| Edit evaluation |
+| Check evaluation |
 |    | Click Element | xpath=//*[@id="ui-id-4"] |
 |    | Click Element | xpath=//*[@id="mybtn_1"] |
-|    | Radio Button Should Be Set To | course_assessment_val | 5 |
+|    | Radio Button Should Be Set To | course_assessment_val | ${evaluation_item#1} |
+|    | Radio Button Should Be Set To | content_assessment_val | ${evaluation_item#2} |
+|    | Radio Button Should Be Set To | apply_assessment_val | ${evaluation_item#3} |
+|    | Radio Button Should Be Set To | slides_assessment_val | ${evaluation_item#4} |
+|    | Radio Button Should Be Set To | activities_assessment_val | ${evaluation_item#5} |
+|    | Radio Button Should Be Set To | discussions_assessment_val | ${evaluation_item#6} |
+|    | Radio Button Should Be Set To | workbooks_assessment_val | ${evaluation_item#7} |
+|    | Radio Button Should Be Set To | knowledge_assessment_val | ${evaluation_item#8} |
+|    | Radio Button Should Be Set To | interests_assessment_val | ${evaluation_item#9} |
+|    | Radio Button Should Be Set To | explained_assessment_val | ${evaluation_item#10} |
+|    | Radio Button Should Be Set To | encouraged_assessment_val | ${evaluation_item#11} |
+|    | Radio Button Should Be Set To | provided_assessment_val | ${evaluation_item#12} |
+|    | Radio Button Should Be Set To | presented_assessment_val | ${evaluation_item#13} |
+|    | Radio Button Should Be Set To | tactful_assessment_val | ${evaluation_item#14} |
+|    | Radio Button Should Be Set To | organized_assessment_val | ${evaluation_item#15} |
+|    | Radio Button Should Be Set To | venue_assessment_val | ${evaluation_item#16} |
+|    | Radio Button Should Be Set To | duration_assessment_val | ${evaluation_item#17} |
+|    | Radio Button Should Be Set To | overall_assessment_val | ${evaluation_item#18} |
+|    | Radio Button Should Be Set To | recommend_assessment_val | ${evaluation_item#19} |
+
+| Click on Evaluation |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[4] |
+|    | Click Element | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[4]/div[1]/div/div/div/div/table/tbody/tr[1]/td[5] |
+|    | ${evaluation_item#1}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[1]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#1} |
+|    | ${evaluation_item#2}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#2} |
+|    | ${evaluation_item#3}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[3]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#3} |
+|    | ${evaluation_item#4}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[4]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#4} |
+|    | ${evaluation_item#5}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[5]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#5} |
+|    | ${evaluation_item#6}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[6]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#6} |
+|    | ${evaluation_item#7}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[7]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#7} |
+|    | ${evaluation_item#8}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#8} |
+|    | ${evaluation_item#9}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[2]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#9} |
+|    | ${evaluation_item#10}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#10} |
+|    | ${evaluation_item#11}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#11} |
+|    | ${evaluation_item#12}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#12} |
+|    | ${evaluation_item#13}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[6]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#13} |
+|    | ${evaluation_item#14}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[7]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#14} |
+|    | ${evaluation_item#15}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[1]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#15} |
+|    | ${evaluation_item#16}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[2]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#16} |
+|    | ${evaluation_item#17}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[3]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#17} |
+|    | ${evaluation_item#18}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[4]/td/table/tbody/tr[1]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#18} |
+|    | ${evaluation_item#19}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[4]/td/table/tbody/tr[2]/td[2]/span/span |
+|    | Set Global Variable | ${evaluation_item#19} |
+
+| Click on last created event |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
+|    | sleep | 2s |
