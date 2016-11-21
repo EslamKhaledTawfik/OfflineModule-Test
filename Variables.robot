@@ -4,7 +4,7 @@
 | ${partner_password} | abc321 |
 | ${Browser}     | Google Chrome |
 | ${SiteUrl}     | http://146.185.174.125/ |
-| ${Delay}       | 1s |
+| ${Delay}       | 3s |
 | ${title}       | Open Home Dashboard - BusinessEdge |
 | ${admin_username} | admin |
 | ${admin_password} | \#ifcbe123456 |

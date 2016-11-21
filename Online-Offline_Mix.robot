@@ -1,9 +1,9 @@
 | *** Settings *** |
-| Test Teardown  | [TestCase]Delete The Created Event From Server |
+| Test Teardown  | close all browsers |
 | Resource       | Keywords.robot |
 
 | *** Test Cases *** |
-| Create and update event from server |
+| Create and update event from server (General Edit) |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
 |    | Save Event |
@@ -57,18 +57,6 @@
 |    | Sync the data |
 |    | Check for the edited event on client (Add Session) |
 
-| Create and update event from client |
-|    | Go to the offline module |
-|    | Create event from client |
-|    | Create session from client |
-|    | Save Event on client |
-|    | Edit last created event on client |
-|    | Edit event on client |
-|    | Sync the data |
-|    | Admin Login |
-|    | Click On Workshop In the server |
-|    | Check For the client_updated Event On Server |
-
 | Create and update trainer from server |
 |    | Create trainer from server |
 |    | Comment | Click Element | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[1]/td[1]/h2/span/a |
@@ -88,6 +76,19 @@
 |    | Create another session from server |
 |    | Save event and store session number |
 |    | Assert successful event update (ِAdd Trainer) |
+|    | Partner login |
+|    | Open the offline module (Workshop) |
+|    | Sync the data |
+|    | Check for the edited event on client (Add Trainer) |
+|    | Check for the number of sessions on client |
+
+| Update Event (Add Session & Add Update) |
+|    | [Documentation] | Precondition: The edited event shouldn't have any trainers |
+|    | [Setup] | [TestCase]Create Event without trainer from server |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Create another session from server |
+|    | Save event and store session number |
 |    | Partner login |
 |    | Open the offline module (Workshop) |
 |    | Sync the data |

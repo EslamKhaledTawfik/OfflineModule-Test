@@ -1,14 +1,13 @@
 | *** Setting *** |
-| Library        | Selenium2Library | 150 | 1.2 |
+| Library        | Selenium2Library | 150 | 1.5 |
 | Resource       | Variables.robot |
-| Library        | MySeleniumTest |
 
 | *** Keywords *** |
 | Admin Login |
 |    | Open Browser | ${SiteUrl} | ${Browser} |
-|    | Set Selenium Speed | 1 |
+|    | Set Selenium Speed | 1.5 |
 |    | Maximize Browser Window |
-|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input | ${admin_username} |
+|    | Input Text | css=body > div > table > tbody > tr:nth-child(2) > td.oe_application > div > div > div.oe_login_pane > form > ul > li:nth-child(5) > input[type="text"] | ${admin_username} |
 |    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${admin_password} |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[10]/button |
 |    | sleep | 2s |
@@ -16,7 +15,7 @@
 | Partner login |
 |    | Open Browser | ${SiteUrl} | ${Browser} |
 |    | Maximize Browser Window |
-|    | Set Selenium Speed | 0.7 |
+|    | Set Selenium Speed | 1.5 |
 |    | Wait Until Page Contains Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input |
 |    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input | ${partner_username} |
 |    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${partner_password} |
@@ -180,10 +179,7 @@
 
 | Check For the client_updated Event On Server |
 |    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
-|    | Comment | Element Should Contain | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/table/tbody/tr[2]/td[1]/table/tbody/tr[7]/td[2]/span/a | Zabul |
-|    | Comment | Element Should Contain | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/table/tbody/tr[2]/td[1]/table/tbody/tr[8]/td[2]/span/a | Leading Your Team |
 |    | Element Should Contain | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/table/tbody/tr[2]/td[2]/table/tbody/tr[4]/td[2]/div/span | ${edit_comment_client} |
-|    | Comment | Element Should Contain | xpath=//*[@id="trainerstable"] |
 
 | Edit last created event(Add Trainer) |
 |    | Edit last created event |
@@ -210,8 +206,8 @@
 |    | Wait Until Page Contains Element | xpath=//*[@id="eventsTable"] |
 
 | Create event from client |
-|    | Wait Until Page Contains Element | xpath=//*[@id="eventsTable"]/div/div[3]/div[2]/span[2]/span |
-|    | Click Element | xpath=//*[@id="eventsTable"]/div/div[3]/div[2]/span[2]/span |
+|    | Wait Until Page Contains Element | xpath=//*[@id="eventsTable"]/div/div[3]/div[2]/span/span |
+|    | Click Element | xpath=//*[@id="eventsTable"]/div/div[3]/div[2]/span/span |
 |    | Select From List By Value | xpath=//*[@id="country"] | 30 |
 |    | Select From List By Value | xpath=//*[@id="area"] | 72 |
 |    | Select From List By Value | xpath=//*[@id="course"] | 997 |
@@ -237,19 +233,20 @@
 
 | Sync the data |
 |    | Click Link | xpath=//*[@id="sync_data"] |
-|    | Sleep | 50s |
+|    | Sleep | 40s |
 
 | Go to the offline module |
 |    | Partner login |
 |    | Open the offline module (Workshop) |
 |    | Load the data |
-|    | Sleep | 3s |
+|    | Sleep | 4s |
 
 | Check for the edited event on client (General Edit) |
 |    | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
 |    | Element should Contain | xpath=//*[@id="main_container"]/div/table/tbody/tr[2]/td[1]/table/tbody/tr[5]/td[2]/select | ${area} |
 
 | Check for the edited event on client (Add Trainer) |
+|    | Wait Until Page Contains Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
 |    | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
 |    | Click Link | xpath=//*[@id="ui-id-2"] |
 |    | Element Should Contain | xpath=//*[@id="trainersList_chosen"]/ul/li[1]/span | ${trainer_server} |
@@ -386,19 +383,17 @@
 |    | Input text | xpath=//*[@id="sessionComment_1"] | Edited Session |
 
 | Edit event on client |
-|    | Comment | Click Button | xpath=//*[@id="enable_editing_button"] |
-|    | Select From List By Value | xpath=//*[@id="area"] | 284 |
-|    | Select From List By Value | xpath=//*[@id="course"] | 2723 |
+|    | Select From List By Value | xpath=//*[@id="area"] | 284 | #Badakhsh |
+|    | Select From List By Value | xpath=//*[@id="course"] | 2723 | #Leading Your Team |
 |    | Input Text | xpath=//*[@id="comments"] | ${edit_comment_client} |
 |    | Click Button | xpath=//*[@id="updateForm"] |
-|    | Comment | Confirm Action |
 |    | Click Button | xpath=//*[@id="back_to_list"] |
 
 | Update event and sync with server |
 |    | Click Element | xpath=//*[@id="updateForm"] |
 |    | Click Button | xpath=//*[@id="back_to_list"] |
 |    | Sync the data |
-|    | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
+|    | Comment | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
 
 | Remove a trainer on client |
 |    | Click Link | xpath=//*[@id="ui-id-2"] |
@@ -522,9 +517,9 @@
 |    | Radio Button Should Be Set To | overall_assessment_val | ${evaluation_item#18} |
 |    | Radio Button Should Be Set To | recommend_assessment_val | ${evaluation_item#19} |
 
-| Click on Evaluation |
-|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[4] |
-|    | Click Element | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[4]/div[1]/div/div/div/div/table/tbody/tr[1]/td[5] |
+| Save Evaluation's value |
+|    | Click On Evaluation To edit |
+|    | sleep | 2s |
 |    | ${evaluation_item#1}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[1]/td[2]/span/span |
 |    | Set Global Variable | ${evaluation_item#1} |
 |    | ${evaluation_item#2}= | Get Text | xpath=/html/body/div[2]/div[2]/div/div/div[4]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/span/span |
@@ -567,3 +562,54 @@
 | Click on last created event |
 |    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[1]/div/table/tbody/tr[1] |
 |    | sleep | 2s |
+
+| Click On Evaluation To edit |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[4] |
+|    | Click Element | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[4]/div[1]/div/div/div/div/table/tbody/tr[1]/td[5] |
+
+| Select Evaluation's value |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[1]/td[2]/span/span/div[2]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[2]/td[2]/span/span/div[3]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[3]/td[2]/span/span/div[4]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[4]/td[2]/span/span/div[2]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[5]/td[2]/span/span/div[5]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[6]/td[2]/span/span/div[1]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[1]/td/table/tbody/tr[7]/td[2]/span/span/div[5]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/span/span/div[1]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[2]/td[2]/span/span/div[3]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/span/span/div[4]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/span/span/div[5]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/span/span/div[3]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[6]/td[2]/span/span/div[1]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[2]/td/table/tbody/tr[7]/td[2]/span/span/div[1]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[1]/td[2]/span/span/div[1]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[2]/td[2]/span/span/div[5]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[3]/td/table/tbody/tr[3]/td[2]/span/span/div[4]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[4]/td/table/tbody/tr[1]/td[2]/span/span/div[5]/span |
+|    | Click Element | xpath=/html/body/div[2]/div[2]/div/div/div[3]/div/div/table[3]/tbody/tr[4]/td/table/tbody/tr[2]/td[2]/span/span/div[1]/span |
+|    | Save Evaluation |
+
+| Click On Evaluation To add |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[4] |
+|    | Click Link | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[4]/div[1]/div/div/div/div/table/tbody/tr[1]/td/a |
+
+| Save Evaluation |
+|    | Sleep | 2s |
+|    | Click button | xpath=/html/body/div[2]/div[11]/button[1] |
+
+| Update session from server |
+|    | sleep | ${Delay} |
+|    | Start Time | 2 |
+|    | End Time | 4 |
+
+| Update Start Time |
+|    | [Arguments] | ${start_time} |
+|    | Clear Element Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[2]/input |
+|    | Input Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[2]/input | ${start_time} |
+|    | Set Global Variable | ${start_time} |
+
+| Update End Time |
+|    | [Arguments] | ${end_time} |
+|    | Clear Element Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[3]/input |
+|    | Input Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[3]/input | ${end_time} |
+|    | Set Global Variable | ${end_time} |

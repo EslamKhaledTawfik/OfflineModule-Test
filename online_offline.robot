@@ -1,5 +1,5 @@
 | *** Settings *** |
-| Test Teardown  | Close All Browsers |
+| Test Teardown  |
 | Resource       | Keywords.robot |
 
 | *** Test Cases *** |
@@ -225,11 +225,41 @@
 |    | Click On Workshop In the server |
 |    | Check for the edited event on server(Add Session) |
 
+| Filling Evaluations |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Edit last created event |
+|    | Click On Evaluation To add |
+|    | Select Evaluation's value |
+|    | Save Event |
+|    | Comment | Click On Workshop In the server |
+|    | Comment | Click on last created event |
+|    | Comment | Save Evaluation's value |
+|    | Comment | Go to the offline module |
+|    | Comment | Edit last created event on client |
+|    | Comment | Check evaluation |
+
 | Compare Evaluations |
 |    | Admin Login |
 |    | Click On Workshop In the server |
 |    | Click on last created event |
-|    | Click on Evaluation |
+|    | Save Evaluation's value |
 |    | Go to the offline module |
+|    | Sync the data |
 |    | Edit last created event on client |
 |    | Check evaluation |
+
+| [In progress]Update Session on Server |
+|    | Admin Login |
+|    | Comment | Click On Workshop In the server |
+|    | Comment | Edit last created event |
+|    | Comment | Create another session from server |
+|    | Comment | Save Event |
+|    | Click On Workshop In the server |
+|    | Edit last created event |
+|    | Update session from server |
+|    | Save Event |
+|    | Comment | Go to the offline module |
+|    | Comment | Edit event on client |
+|    | Comment | Check for the edited event on client (Add Session) |
+|    | Element should contain | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/table/tbody/tr[2]/td[2] | 2 |
