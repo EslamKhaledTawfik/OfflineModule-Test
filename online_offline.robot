@@ -7,7 +7,7 @@
 |    | [Tags] | Create Event |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
 |    | Store Server_EventID from the event |
@@ -19,7 +19,7 @@
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
 |    | Add a Trainer |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
 
@@ -100,7 +100,7 @@
 |    | Admin Login |
 |    | Click On Workshop In the server |
 |    | Edit last created event(Add Trainer) |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Go to the offline module |
 |    | Sync the data |
 |    | Check for the edited event on client (Add Trainer) |
@@ -109,7 +109,7 @@
 |    | Admin Login |
 |    | Click On Workshop In the server |
 |    | Edit last created event (Add multiple Trainer) |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Go to the offline module |
 |    | Sync the data |
 |    | Check for the edited event on client(Add Multiple Trainer) |
@@ -119,7 +119,7 @@
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Delete Trainer |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Go to the offline module |
 |    | Sync the data |
 |    | Check for the edited event on client(Remove Trainer) |
@@ -129,7 +129,7 @@
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Delete Trainer |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Go to the offline module |
 |    | Sync the data |
 |    | Check for the edited event on client(Remove Multiple Trainers) |
@@ -231,7 +231,7 @@
 |    | Edit last created event |
 |    | Click On Evaluation To add |
 |    | Select Evaluation's value |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Comment | Click On Workshop In the server |
 |    | Comment | Click on last created event |
 |    | Comment | Save Evaluation's value |
@@ -254,12 +254,37 @@
 |    | Comment | Click On Workshop In the server |
 |    | Comment | Edit last created event |
 |    | Comment | Create another session from server |
-|    | Comment | Save Event |
+|    | Comment | Save Event On Server |
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Update session from server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Comment | Go to the offline module |
 |    | Comment | Edit event on client |
 |    | Comment | Check for the edited event on client (Add Session) |
 |    | Element should contain | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/table/tbody/tr[2]/td[2] | 2 |
+
+| Update Event From Server(Add Participant) |
+|    | [Setup] |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Edit last created event(Add Participant) |
+|    | Save Event On Server |
+|    | Go to the offline module |
+|    | Sync the data |
+|    | Check for the edited event on client (Add Participant) |
+
+| Create Participant from client |
+|    | Go to the offline module |
+|    | Create event from client |
+|    | Create session from client |
+|    | Save Event on client |
+|    | Edit last created event on client |
+|    | Create Participant from client |
+|    | Confirm Action |
+|    | Page Should Contain | ${client_participant_first_name} |
+
+| Create Participant from Server |
+|    | Admin Login |
+|    | Click On Workshop In the server |
+|    | Edit last created event(Create Participant) |

@@ -6,7 +6,7 @@
 | Create and update event from server (General Edit) |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Click On Workshop In the server |
 |    | Edit last created event (General Edit) |
 |    | Assert successful event update (General Edit) |
@@ -19,10 +19,10 @@
 | Create and update event from server (Add Trainer) |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Click On Workshop In the server |
 |    | Edit last created event(Add Trainer) |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Assert successful event update (ِAdd Trainer) |
 |    | Partner login |
 |    | Open the offline module (Workshop) |
@@ -32,11 +32,11 @@
 | Create and update event from server (Add Multiple Trainers) |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Click On Workshop In the server |
 |    | Edit last created event(Add Trainer) |
 |    | Add another Trainer |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Assert successful event update (ِAdd Multiple Trainer) |
 |    | Partner login |
 |    | Open the offline module (Workshop) |
@@ -46,7 +46,7 @@
 | Create and update event from server (Add Session) |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Create another session from server |

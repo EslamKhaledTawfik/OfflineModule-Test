@@ -33,3 +33,11 @@
 | ${third_trainer} | ${EMPTY} |
 | ${trainer_server} | Usman Hafeez |
 | ${another_trainer_server} | Mohammad Hamid Rasooli |
+| ${participant} | Obaidullah Sherzad \ Hakimi |
+| ${client_participant_first_name} | Eslam |
+| ${client_participant_second_name} | Khaled |
+| ${client_participant_last_name} | Tawfik |
+| ${client_participant_emailaddress} | eslamkhaledtawfik@gmail.com |
+| ${client_participant_mobile} | 0124215215112 |
+| ${client_participant_phone} | 124124124124 |
+| ${client_participant_age} | 155 |

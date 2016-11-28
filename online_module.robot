@@ -7,7 +7,7 @@
 |    | [Tags] | Create Event |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
 
@@ -15,7 +15,7 @@
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
 |    | Add a Trainer |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
 
@@ -50,7 +50,7 @@
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Create another session from server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Assert successful event update (Add Session) |
 
 | Update Event From Server(Remove Session) |
@@ -58,7 +58,7 @@
 |    | Click On Workshop In the server |
 |    | Edit last created event |
 |    | Delete session from server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Assert successful event update (Remove Session) |
 
 | Update Event From Server (Add Trainer) |
@@ -87,5 +87,5 @@
 |    | Edit last created event |
 |    | Delete Trainer on server |
 |    | Delete Trainer on server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Assert successful event update (ِRemove Trainer) |

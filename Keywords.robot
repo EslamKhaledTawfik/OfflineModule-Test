@@ -7,7 +7,7 @@
 |    | Open Browser | ${SiteUrl} | ${Browser} |
 |    | Set Selenium Speed | 1.5 |
 |    | Maximize Browser Window |
-|    | Input Text | css=body > div > table > tbody > tr:nth-child(2) > td.oe_application > div > div > div.oe_login_pane > form > ul > li:nth-child(5) > input[type="text"] | ${admin_username} |
+|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[5]/input | ${admin_username} |
 |    | Input Password | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[7]/input | ${admin_password} |
 |    | Click Button | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div[3]/form/ul/li[10]/button |
 |    | sleep | 2s |
@@ -145,7 +145,7 @@
 |    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[2]/div/div/div/div/div/table/tbody/tr[2]/td/a |
 |    | Select From List By Label | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[2]/select | ${another_trainer_server} |
 
-| Save Event |
+| Save Event On Server |
 |    | Click Button | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[1]/div/div[2]/span[2]/button |
 
 | Assert Successfull Creation |
@@ -233,7 +233,7 @@
 
 | Sync the data |
 |    | Click Link | xpath=//*[@id="sync_data"] |
-|    | Sleep | 40s |
+|    | Sleep | 30s |
 
 | Go to the offline module |
 |    | Partner login |
@@ -314,7 +314,6 @@
 |    | Press Key | xpath=//*[@id="sessionEndTime_2"] | 0800PM |
 
 | Store session number on client |
-|    | Comment | Click Button | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/table/tbody/tr[2]/td[1]/div/div[2]/span[2]/button |
 |    | ${session_num}= | Get Text | xpath=//*[@id="sessions_num"] |
 |    | Set Global Variable | ${session_num} |
 
@@ -484,7 +483,7 @@
 |    | [Tags] | Create Event |
 |    | Admin Login |
 |    | Create Event Without Trainer From Server |
-|    | Save Event |
+|    | Save Event On Server |
 |    | Sleep | ${Delay} |
 |    | Assert Successfull Creation |
 
@@ -613,3 +612,64 @@
 |    | Clear Element Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[3]/input |
 |    | Input Text | xpath=/html/body/div[1]/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/div[4]/div/div/span[3]/input | ${end_time} |
 |    | Set Global Variable | ${end_time} |
+
+| Edit event on client (Add Participant ) |
+|    | Click Link | xpath=//*[@id="ui-id-3"] |
+|    | Select a participant on client |
+
+| Select a participant on client |
+|    | Input Text | xpath=//*//*[@id="psList_chosen"]/ul/li/input | ${participant} |
+|    | Press Key | xpath=//*//*[@id="psList_chosen"]/ul/li/input | \\13 |
+
+| Check For the client_updated Event (Add Participant) on Server |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[3] |
+|    | Page Should Contain | ${participant} |
+
+| Add a Participant |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[3] |
+|    | Click Link | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[3]/div[2]/div/div/div/div/table/tbody/tr[1]/td/a |
+|    | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[3]/div[2]/div/div/div/div/div/div/div[4]/div/div/span[3]/div/input | ${participant} |
+
+| Edit last created event(Add Participant) |
+|    | Edit last created event |
+|    | Add a Participant |
+
+| Check for the edited event on client (Add Participant) |
+|    | Wait Until Page Contains Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
+|    | Click Element | xpath=//*[@id="eventsTable"]/div/table/tbody/tr[1] |
+|    | Click Link | xpath=//*[@id="ui-id-3"] |
+|    | sleep | 3s |
+|    | Page Should Contain | ${participant} |
+|    | Comment |    | xpath=//*//*[@id="psList_chosen"] |
+
+| Click Edit On Client |
+|    | Click Button | xpath=//*[@id="enable_editing_button"] |
+
+| Create Participant from client |
+|    | Click Element | xpath=//*[@id="ui-id-3"] |
+|    | Click Element | xpath=//*[@id="ep_btn"] |
+|    | Input Text | xpath=//*[@id="first_name"] | ${client_participant_first_name} |
+|    | Input Text | xpath=//*[@id="middle_name"] | ${client_participant_second_name} |
+|    | Input Text | xpath=//*[@id="last_name"] | ${client_participant_last_name} |
+|    | Select From List By Value | xpath=//*[@id="gender"] | male |
+|    | Select From List By Value | xpath=//*[@id="participant_areas"] | 72 |
+|    | Input Text | xpath=//*[@id="email"] | ${client_participant_emailaddress} |
+|    | Input Text | xpath=//*[@id="phone"] | ${client_participant_phone} |
+|    | Input Text | xpath=//*[@id="mobile"] | ${client_participant_mobile} |
+|    | Input Text | xpath=//*[@id="age"] | ${client_participant_age} |
+|    | Select From List By Value | xpath=//*[@id="participant_position"] | UnEmployed |
+|    | Select From List By Value | xpath=//*[@id="participant_educational_level"] | 4 |
+|    | Select From List By Value | xpath=//*[@id="job_search_period"] | 1 |
+|    | Click Button | xpath=//*[@id="save_ep"] |
+
+| Edit last created event(Create Participant) |
+|    | Edit last created event |
+|    | Create a Participant from server |
+
+| Create a Participant from server |
+|    | Click Element | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/ul/li[3] |
+|    | Click Link | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[3]/div[2]/div/div/div/div/table/tbody/tr[1]/td/a |
+|    | Comment | Input Text | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[3]/div[2]/div/div/div/div/div/div/div[4]/div/div/span[3]/div/input | ${participant} |
+|    | Click Image | xpath=/html/body/div/table/tbody/tr[2]/td[2]/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div/div[3]/div[2]/div/div/div/div/div/div/div[4]/div/div/span[3]/div/span[2]/img |
+|    | sleep | 2s |
+|    | Click Element | xpath=/html/body/div/ul/li[9] |
